@@ -46,7 +46,7 @@ function(n=100, p=50, model="LPGM", graph.type="scale-free"){
 		theta = 0.4
 		maxit = 1000
 		
-		X <- matrix(rbinom(n*p, 1, 0.9), nrow=n, ncol=p)
+		X <- matrix(rbinom(n*p, 1, 0.1), nrow=n, ncol=p)
 		X[X==0] <- -1
 		# Changing sign of the parts of adjacency matrix 
 		####dims = 1:size(x,2);Ising0.
