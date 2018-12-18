@@ -43,7 +43,8 @@ function(n=100, p=50, model="LPGM", graph.type="scale-free"){
 	}
 	#
 	if(model == "ISM"){
-		theta = 0.4
+		theta = 0
+		tau = 0
 		maxit = 1000
 		
 		X <- matrix(rbinom(n*p, 1, 0.6), nrow=n, ncol=p)
@@ -51,7 +52,7 @@ function(n=100, p=50, model="LPGM", graph.type="scale-free"){
 		# Changing sign of the parts of adjacency matrix 
 		####dims = 1:size(x,2);Ising0.
 		Theta <- -theta*B
-		Theta[,1:(p/2)] <- -Theta[,1:(p/2)]
+		# Theta[,1:(p/2)] <- -Theta[,1:(p/2)]
 		Iterat <- array(0, dim=c(n,p,maxit))
 		t = 1
 		# RUN GIBBS SAMPLER
@@ -59,7 +60,7 @@ function(n=100, p=50, model="LPGM", graph.type="scale-free"){
 			t = t+1
 			# Loop over dimensions  
 			for (iD in 1:p){
-				odds <- exp(2*X[, -iD]%*%Theta[-iD, iD])
+				odds <- exp(2*X[, -iD]%*%Theta[-iD, iD] + tau) 
 				prob <- odds /(1+odds)
 				X[, iD] <- rbinom(length(prob), 1, prob)*2 -1  
 			}
