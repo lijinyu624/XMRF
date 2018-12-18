@@ -44,7 +44,7 @@ function(n=100, p=50, model="LPGM", graph.type="scale-free"){
 	#
 	if(model == "ISM"){
 		theta = 0.4
-		tau = 1
+		tau = 10
 		maxit = 1000
 		
 		X <- matrix(rbinom(n*p, 1, 0.6), nrow=n, ncol=p)
